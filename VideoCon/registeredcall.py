@@ -161,7 +161,7 @@ try:
 
 
     #transport = None
-	#acc.delete()
+    #acc.delete()
     #acc = None
     #lib.destroy()
     #lib = None
@@ -169,7 +169,7 @@ try:
 except pj.Error, e:
     print "Exception: " + str(e)
     transport = None
-	acc.delete()
+    acc.delete()
     acc = None
     lib.destroy()
     lib = None
