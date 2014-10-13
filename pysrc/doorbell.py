@@ -12,23 +12,59 @@
 import RPi.GPIO as GPIO
 import time
 
-PIR_PIN = 7
+BUT_PIN = 7
 BOUNCE_TIME = 200
+MAG0_PIN = 11
+MAG1_PIN = 12
+MAG2_PIN = 13
+MAG3_PIN = 15
+MAG4_PIN = 16
+MAG5_PIN = 18
+MAG6_PIN = 22
 
 def callback_function(channel):
-        print "Motion detected! ", time.strftime("%H:%M:%S")
+    print "Motion detected! ", time.strftime("%H:%M:%S")
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(PIR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(BUT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(MAG0_PIN, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(MAG1_PIN, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(MAG2_PIN, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(MAG3_PIN, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(MAG4_PIN, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(MAG5_PIN, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(MAG6_PIN, GPIO.OUT, initial=GPIO.LOW)
+
+pwm_mag0 = GPIO.PWM(MAG0_PIN, 70)
+pwm_mag0.start(0)
+pwm_mag1 = GPIO.PWM(MAG1_PIN, 70)
+pwm_mag1.start(0)
+pwm_mag2 = GPIO.PWM(MAG2_PIN, 70)
+pwm_mag2.start(0)
+pwm_mag3 = GPIO.PWM(MAG3_PIN, 70)
+pwm_mag3.start(0)
+pwm_mag4 = GPIO.PWM(MAG4_PIN, 70)
+pwm_mag4.start(0)
+pwm_mag5 = GPIO.PWM(MAG5_PIN, 70)
+pwm_mag5.start(0)
+pwm_mag6 = GPIO.PWM(MAG6_PIN, 70)
+pwm_mag6.start(0)
 
 try:
-        GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
+    GPIO.add_event_detect(BUT_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
 
-        while True:
-                time.sleep(1)
+    while True:
+        #pwm_mag0.ChangeDutyCycle(0)
+		#pwm_mag1.ChangeDutyCycle(0)
+		#pwm_mag2.ChangeDutyCycle(0)
+		#pwm_mag3.ChangeDutyCycle(0)
+		#pwm_mag4.ChangeDutyCycle(0)
+		#pwm_mag5.ChangeDutyCycle(0)
+		#pwm_mag6.ChangeDutyCycle(0)
+        time.sleep(1)
 
 except KeyboardInterrupt:
-        print "Cleaning up the GPIO" 
+    print "Cleaning up the GPIO" 
 	GPIO.cleanup()
 
 
