@@ -55,17 +55,17 @@ try:
 
     while True:
         #pwm_mag0.ChangeDutyCycle(0)
-		#pwm_mag1.ChangeDutyCycle(0)
-		#pwm_mag2.ChangeDutyCycle(0)
-		#pwm_mag3.ChangeDutyCycle(0)
-		#pwm_mag4.ChangeDutyCycle(0)
-		#pwm_mag5.ChangeDutyCycle(0)
-		#pwm_mag6.ChangeDutyCycle(0)
+        #pwm_mag1.ChangeDutyCycle(0)
+        #pwm_mag2.ChangeDutyCycle(0)
+        #pwm_mag3.ChangeDutyCycle(0)
+        #pwm_mag4.ChangeDutyCycle(0)
+        #pwm_mag5.ChangeDutyCycle(0)
+        #pwm_mag6.ChangeDutyCycle(0)
         time.sleep(1)
 
 except KeyboardInterrupt:
     print "Cleaning up the GPIO" 
-	GPIO.cleanup()
+    GPIO.cleanup()
 
 
 
