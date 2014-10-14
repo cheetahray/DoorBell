@@ -59,51 +59,51 @@ class Tests(unittest.TestCase):
         for i in range(1,10):
             print(i)
             pwm_mag1.ChangeDutyCycle(0)
-            time.sleep(5)
+            time.sleep(0.5)
             pwm_mag1.ChangeDutyCycle(100)
-            time.sleep(5)
+            time.sleep(0.5)
         
     def test_2(self):
         for i in range(1,10):
             pwm_mag2.ChangeDutyCycle(0)
-            time.sleep(500)
+            time.sleep(0.5)
             pwm_mag2.ChangeDutyCycle(100)
-            time.sleep(500)
+            time.sleep(0.5)
         
     def test_3(self):
         for i in range(1,10):
             pwm_mag3.ChangeDutyCycle(0)
-            time.sleep(500)
+            time.sleep(0.5)
             pwm_mag3.ChangeDutyCycle(100)
-            time.sleep(500)
+            time.sleep(0.5)
         
     def test_4(self):
         for i in range(1,10):
             pwm_mag4.ChangeDutyCycle(0)
-            time.sleep(500)
+            time.sleep(0.5)
             pwm_mag4.ChangeDutyCycle(100)
-            time.sleep(500)
+            time.sleep(0.5)
         
     def test_5(self):
         for i in range(1,10):
             pwm_mag5.ChangeDutyCycle(0)
-            time.sleep(500)
+            time.sleep(0.5)
             pwm_mag5.ChangeDutyCycle(100)
-            time.sleep(500)
+            time.sleep(0.5)
         
     def test_6(self):
         for i in range(1,10):
             pwm_mag6.ChangeDutyCycle(0)
-            time.sleep(500)
+            time.sleep(0.5)
             pwm_mag6.ChangeDutyCycle(100)
-            time.sleep(500)
+            time.sleep(0.5)
     
     def test_7(self):
         for i in range(1,10):
             pwm_mag7.ChangeDutyCycle(0)
-            time.sleep(500)
+            time.sleep(0.5)
             pwm_mag7.ChangeDutyCycle(100)
-            time.sleep(500)
+            time.sleep(0.5)
     
 def play_midi():
     for message in mid.play():
