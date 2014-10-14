@@ -57,10 +57,11 @@ class Tests(unittest.TestCase):
         
     def test_1(self):
         for i in range(1,10):
+            print(i)
             pwm_mag1.ChangeDutyCycle(0)
-            time.sleep(500)
+            time.sleep(5)
             pwm_mag1.ChangeDutyCycle(100)
-            time.sleep(500)
+            time.sleep(5)
         
     def test_2(self):
         for i in range(1,10):
