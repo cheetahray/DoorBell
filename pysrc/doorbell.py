@@ -39,11 +39,11 @@ def play_midi():
                 else :
                     pwm_mag0.ChangeDutyCycle(100)
             elif message.note == 62 :
-                if message.velocity == 0):
+                if message.velocity == 0 :
                     pwm_mag1.ChangeDutyCycle(0)
                 else :
                     pwm_mag1.ChangeDutyCycle(100)
-            elif message.note == 63):
+            elif message.note == 63 :
                 if message.velocity == 0 :
                     pwm_mag2.ChangeDutyCycle(0)
                 else :
@@ -116,7 +116,7 @@ pwm_mag6.start(0)
 try:
     GPIO.add_event_detect(BUT_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
 
-    if __name__ ==  '__main__'
+    if __name__ ==  '__main__':
         unittest.main()
     
     while True:
