@@ -15,7 +15,7 @@ import unittest
 from mido import MidiFile
 
 mid = MidiFile('song.mid')
-ifplay = False
+isplay = False
 BUT_PIN = 7
 BOUNCE_TIME = 200
 MAG1_PIN = 11
