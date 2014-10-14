@@ -14,7 +14,7 @@ import time
 import unittest
 from mido import MidiFile
 
-Class Tests(unittest.TestCase):
+class Tests(unittest.TestCase):
     def test_1(self):
         play_midi();
     
@@ -32,56 +32,56 @@ MAG6_PIN = 22
 
 def play_midi():
     for message in mid.play():
-        if(message.type == 'note_on')
-            if(message.note == 60)
-                if(message.velocity == 0)
+        if message.type == 'note_on' :
+            if message.note == 60 :
+                if message.velocity == 0 :
                     pwm_mag0.ChangeDutyCycle(0)
-                else
+                else :
                     pwm_mag0.ChangeDutyCycle(100)
-            elif(message.note == 62)
-                if(message.velocity == 0)
+            elif message.note == 62 :
+                if(message.velocity == 0):
                     pwm_mag1.ChangeDutyCycle(0)
                 else
                     pwm_mag1.ChangeDutyCycle(100)
-            elif(message.note == 63)
-                if(message.velocity == 0)
+            elif(message.note == 63):
+                if(message.velocity == 0):
                     pwm_mag2.ChangeDutyCycle(0)
                 else
                     pwm_mag2.ChangeDutyCycle(100)    
-            elif(message.note == 64)
-                if(message.velocity == 0)
+            elif(message.note == 64):
+                if(message.velocity == 0):
                     pwm_mag3.ChangeDutyCycle(0)
                 else
                     pwm_mag3.ChangeDutyCycle(100)
-            elif(message.note == 65)
-                if(message.velocity == 0)
+            elif(message.note == 65):
+                if(message.velocity == 0):
                     pwm_mag4.ChangeDutyCycle(0)
                 else
                     pwm_mag4.ChangeDutyCycle(100)
-            elif(message.note == 66)
-                if(message.velocity == 0)
+            elif(message.note == 66):
+                if(message.velocity == 0):
                     pwm_mag5.ChangeDutyCycle(0)
                 else
                     pwm_mag5.ChangeDutyCycle(100)
-            elif(message.note == 67)
-                if(message.velocity == 0)
+            elif(message.note == 67):
+                if(message.velocity == 0):
                     pwm_mag6.ChangeDutyCycle(0)
                 else
                     pwm_mag6.ChangeDutyCycle(100)
-        elif(message.type == 'note_off')
-            if(message.note == 60)
+        elif(message.type == 'note_off'):
+            if(message.note == 60):
                 pwm_mag0.ChangeDutyCycle(0)
-            elif(message.note == 62)
+            elif(message.note == 62):
                 pwm_mag1.ChangeDutyCycle(0)
-            elif(message.note == 63)
+            elif(message.note == 63):
                 pwm_mag2.ChangeDutyCycle(0)    
-            elif(message.note == 64)
+            elif(message.note == 64):
                 pwm_mag3.ChangeDutyCycle(0)
-            elif(message.note == 65)
+            elif(message.note == 65):
                 pwm_mag4.ChangeDutyCycle(0)
-            elif(message.note == 66)
+            elif(message.note == 66):
                 pwm_mag5.ChangeDutyCycle(0)
-            elif(message.note == 67)
+            elif(message.note == 67):
                 pwm_mag6.ChangeDutyCycle(0)
 
 def callback_function(channel):
