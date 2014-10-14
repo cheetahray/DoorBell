@@ -121,7 +121,7 @@ try:
         unittest.main()
     
     while True:
-        if isplay == True
+        if True == isplay :
             play_midi()
 
 except KeyboardInterrupt:
