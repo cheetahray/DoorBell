@@ -19,7 +19,7 @@ class Tests(unittest.TestCase):
         play_midi();
     
 mid = MidiFile('song.mid')
-
+ifplay = False
 BUT_PIN = 7
 BOUNCE_TIME = 200
 MAG0_PIN = 11
@@ -32,60 +32,61 @@ MAG6_PIN = 22
 
 def play_midi():
     for message in mid.play():
-        if message.type == 'note_on' :
-            if message.note == 60 :
-                if message.velocity == 0 :
+        isplay = False
+        if 'note_on' == message.type :
+            if 60 == message.note :
+                if 0 == message.velocity :
                     pwm_mag0.ChangeDutyCycle(0)
                 else :
                     pwm_mag0.ChangeDutyCycle(100)
-            elif message.note == 62 :
-                if message.velocity == 0 :
+            elif 61 == message.note :
+                if 0 == message.velocity :
                     pwm_mag1.ChangeDutyCycle(0)
                 else :
                     pwm_mag1.ChangeDutyCycle(100)
-            elif message.note == 63 :
-                if message.velocity == 0 :
+            elif 62 == message.note :
+                if 0 == message.velocity :
                     pwm_mag2.ChangeDutyCycle(0)
                 else :
                     pwm_mag2.ChangeDutyCycle(100)    
-            elif message.note == 64 :
-                if message.velocity == 0 :
+            elif 63 == message.note :
+                if 0 == message.velocity :
                     pwm_mag3.ChangeDutyCycle(0)
                 else :
                     pwm_mag3.ChangeDutyCycle(100)
-            elif message.note == 65 :
-                if message.velocity == 0 :
+            elif 64 == message.note :
+                if 0 == message.velocity :
                     pwm_mag4.ChangeDutyCycle(0)
                 else :
                     pwm_mag4.ChangeDutyCycle(100)
-            elif message.note == 66 :
-                if message.velocity == 0 :
+            elif 65 == message.note :
+                if 0 == message.velocity :
                     pwm_mag5.ChangeDutyCycle(0)
                 else :
                     pwm_mag5.ChangeDutyCycle(100)
-            elif message.note == 67 :
-                if message.velocity == 0 :
+            elif 66 == message.note :
+                if 0 == message.velocity :
                     pwm_mag6.ChangeDutyCycle(0)
                 else :
                     pwm_mag6.ChangeDutyCycle(100)
-        elif message.type == 'note_off' :
-            if message.note == 60 :
+        elif 'note_off' == message.type :
+            if 60 == message.note :
                 pwm_mag0.ChangeDutyCycle(0)
-            elif message.note == 62 :
+            elif 61 == message.note :
                 pwm_mag1.ChangeDutyCycle(0)
-            elif message.note == 63 :
+            elif 62 == message.note :
                 pwm_mag2.ChangeDutyCycle(0)    
-            elif message.note == 64 :
+            elif 63 == message.note :
                 pwm_mag3.ChangeDutyCycle(0)
-            elif message.note == 65 :
+            elif 64 == message.note :
                 pwm_mag4.ChangeDutyCycle(0)
-            elif message.note == 66 :
+            elif 65 == message.note :
                 pwm_mag5.ChangeDutyCycle(0)
-            elif message.note == 67 :
+            elif 66 == message.note :
                 pwm_mag6.ChangeDutyCycle(0)
-
+                
 def callback_function(channel):
-    play_midi()
+    isplay = True
     #print "Button detected! ", time.strftime("%H:%M:%S")
 
 GPIO.setmode(GPIO.BOARD)
@@ -116,11 +117,12 @@ pwm_mag6.start(0)
 try:
     GPIO.add_event_detect(BUT_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
 
-    if __name__ ==  '__main__':
+    if '__main__' == __name__ :
         unittest.main()
     
     while True:
-        time.sleep(1)
+        if isplay == True
+            play_midi()
 
 except KeyboardInterrupt:
     print "Cleaning up the GPIO" 
