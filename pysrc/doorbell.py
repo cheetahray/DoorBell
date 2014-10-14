@@ -14,93 +14,28 @@ import time
 import unittest
 from mido import MidiFile
 
-class Tests(unittest.TestCase):
-    def test_1(self):
-        play_midi();
-    
 mid = MidiFile('song.mid')
 ifplay = False
 BUT_PIN = 7
 BOUNCE_TIME = 200
-MAG0_PIN = 11
-MAG1_PIN = 12
-MAG2_PIN = 13
-MAG3_PIN = 15
-MAG4_PIN = 16
-MAG5_PIN = 18
-MAG6_PIN = 22
-
-def play_midi():
-    for message in mid.play():
-        isplay = False
-        if 'note_on' == message.type :
-            if 60 == message.note :
-                if 0 == message.velocity :
-                    pwm_mag0.ChangeDutyCycle(0)
-                else :
-                    pwm_mag0.ChangeDutyCycle(100)
-            elif 61 == message.note :
-                if 0 == message.velocity :
-                    pwm_mag1.ChangeDutyCycle(0)
-                else :
-                    pwm_mag1.ChangeDutyCycle(100)
-            elif 62 == message.note :
-                if 0 == message.velocity :
-                    pwm_mag2.ChangeDutyCycle(0)
-                else :
-                    pwm_mag2.ChangeDutyCycle(100)    
-            elif 63 == message.note :
-                if 0 == message.velocity :
-                    pwm_mag3.ChangeDutyCycle(0)
-                else :
-                    pwm_mag3.ChangeDutyCycle(100)
-            elif 64 == message.note :
-                if 0 == message.velocity :
-                    pwm_mag4.ChangeDutyCycle(0)
-                else :
-                    pwm_mag4.ChangeDutyCycle(100)
-            elif 65 == message.note :
-                if 0 == message.velocity :
-                    pwm_mag5.ChangeDutyCycle(0)
-                else :
-                    pwm_mag5.ChangeDutyCycle(100)
-            elif 66 == message.note :
-                if 0 == message.velocity :
-                    pwm_mag6.ChangeDutyCycle(0)
-                else :
-                    pwm_mag6.ChangeDutyCycle(100)
-        elif 'note_off' == message.type :
-            if 60 == message.note :
-                pwm_mag0.ChangeDutyCycle(0)
-            elif 61 == message.note :
-                pwm_mag1.ChangeDutyCycle(0)
-            elif 62 == message.note :
-                pwm_mag2.ChangeDutyCycle(0)    
-            elif 63 == message.note :
-                pwm_mag3.ChangeDutyCycle(0)
-            elif 64 == message.note :
-                pwm_mag4.ChangeDutyCycle(0)
-            elif 65 == message.note :
-                pwm_mag5.ChangeDutyCycle(0)
-            elif 66 == message.note :
-                pwm_mag6.ChangeDutyCycle(0)
-                
-def callback_function(channel):
-    isplay = True
-    #print "Button detected! ", time.strftime("%H:%M:%S")
+MAG1_PIN = 11
+MAG2_PIN = 12
+MAG3_PIN = 13
+MAG4_PIN = 15
+MAG5_PIN = 16
+MAG6_PIN = 18
+MAG7_PIN = 22
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(BUT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(MAG0_PIN, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(MAG1_PIN, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(MAG2_PIN, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(MAG3_PIN, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(MAG4_PIN, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(MAG5_PIN, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(MAG6_PIN, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(MAG7_PIN, GPIO.OUT, initial=GPIO.LOW)
 
-pwm_mag0 = GPIO.PWM(MAG0_PIN, 70)
-pwm_mag0.start(0)
 pwm_mag1 = GPIO.PWM(MAG1_PIN, 70)
 pwm_mag1.start(0)
 pwm_mag2 = GPIO.PWM(MAG2_PIN, 70)
@@ -113,12 +48,149 @@ pwm_mag5 = GPIO.PWM(MAG5_PIN, 70)
 pwm_mag5.start(0)
 pwm_mag6 = GPIO.PWM(MAG6_PIN, 70)
 pwm_mag6.start(0)
+pwm_mag7 = GPIO.PWM(MAG7_PIN, 70)
+pwm_mag7.start(0)
+
+class Tests(unittest.TestCase):
+    def test_0(self):
+        play_midi();
+        
+    def test_1(self):
+        for i in range(1,10):
+            pwm_mag1.ChangeDutyCycle(0)
+            time.sleep(500)
+            pwm_mag1.ChangeDutyCycle(100)
+            time.sleep(500)
+        
+    def test_2(self):
+        for i in range(1,10):
+            pwm_mag2.ChangeDutyCycle(0)
+            time.sleep(500)
+            pwm_mag2.ChangeDutyCycle(100)
+            time.sleep(500)
+        
+    def test_3(self):
+        for i in range(1,10):
+            pwm_mag3.ChangeDutyCycle(0)
+            time.sleep(500)
+            pwm_mag3.ChangeDutyCycle(100)
+            time.sleep(500)
+        
+    def test_4(self):
+        for i in range(1,10):
+            pwm_mag4.ChangeDutyCycle(0)
+            time.sleep(500)
+            pwm_mag4.ChangeDutyCycle(100)
+            time.sleep(500)
+        
+    def test_5(self):
+        for i in range(1,10):
+            pwm_mag5.ChangeDutyCycle(0)
+            time.sleep(500)
+            pwm_mag5.ChangeDutyCycle(100)
+            time.sleep(500)
+        
+    def test_6(self):
+        for i in range(1,10):
+            pwm_mag6.ChangeDutyCycle(0)
+            time.sleep(500)
+            pwm_mag6.ChangeDutyCycle(100)
+            time.sleep(500)
+    
+    def test_7(self):
+        for i in range(1,10):
+            pwm_mag7.ChangeDutyCycle(0)
+            time.sleep(500)
+            pwm_mag7.ChangeDutyCycle(100)
+            time.sleep(500)
+    
+def play_midi():
+    for message in mid.play():
+        isplay = False
+        if 'note_on' == message.type :
+            if 60 == message.note :
+                if 0 == message.velocity :
+                    pwm_mag1.ChangeDutyCycle(0)
+                else :
+                    pwm_mag1.ChangeDutyCycle(100)
+            elif 61 == message.note :
+                if 0 == message.velocity :
+                    pwm_mag2.ChangeDutyCycle(0)
+                else :
+                    pwm_mag2.ChangeDutyCycle(100)
+            elif 62 == message.note :
+                if 0 == message.velocity :
+                    pwm_mag3.ChangeDutyCycle(0)
+                else :
+                    pwm_mag3.ChangeDutyCycle(100)    
+            elif 63 == message.note :
+                if 0 == message.velocity :
+                    pwm_mag4.ChangeDutyCycle(0)
+                else :
+                    pwm_mag4.ChangeDutyCycle(100)
+            elif 64 == message.note :
+                if 0 == message.velocity :
+                    pwm_mag5.ChangeDutyCycle(0)
+                else :
+                    pwm_mag5.ChangeDutyCycle(100)
+            elif 65 == message.note :
+                if 0 == message.velocity :
+                    pwm_mag6.ChangeDutyCycle(0)
+                else :
+                    pwm_mag6.ChangeDutyCycle(100)
+            elif 66 == message.note :
+                if 0 == message.velocity :
+                    pwm_mag7.ChangeDutyCycle(0)
+                else :
+                    pwm_mag7.ChangeDutyCycle(100)
+        elif 'note_off' == message.type :
+            if 60 == message.note :
+                pwm_mag1.ChangeDutyCycle(0)
+            elif 61 == message.note :
+                pwm_mag2.ChangeDutyCycle(0)
+            elif 62 == message.note :
+                pwm_mag3.ChangeDutyCycle(0)    
+            elif 63 == message.note :
+                pwm_mag4.ChangeDutyCycle(0)
+            elif 64 == message.note :
+                pwm_mag5.ChangeDutyCycle(0)
+            elif 65 == message.note :
+                pwm_mag6.ChangeDutyCycle(0)
+            elif 66 == message.note :
+                pwm_mag7.ChangeDutyCycle(0)
+                
+def callback_function(channel):
+    isplay = True
+    #print "Button detected! ", time.strftime("%H:%M:%S")
 
 try:
     GPIO.add_event_detect(BUT_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
 
     if '__main__' == __name__ :
-        unittest.main()
+        midi_suite = unittest.TestSuite()
+        _1st_suite = unittest.TestSuite()
+        _2st_suite = unittest.TestSuite()
+        _3st_suite = unittest.TestSuite()
+        _4st_suite = unittest.TestSuite()
+        _5st_suite = unittest.TestSuite()
+        _6st_suite = unittest.TestSuite()
+        _7st_suite = unittest.TestSuite()
+        all_suite = unittest.TestSuite()
+        _1st_suite.addTest(Tests("test_1"))
+        _2st_suite.addTest(Tests("test_2"))
+        _3st_suite.addTest(Tests("test_3"))
+        _4st_suite.addTest(Tests("test_4"))
+        _5st_suite.addTest(Tests("test_5"))
+        _6st_suite.addTest(Tests("test_6"))
+        _7st_suite.addTest(Tests("test_7"))
+        all_suite.addTest(_1st_suite)
+        all_suite.addTest(_2st_suite)
+        all_suite.addTest(_3st_suite)
+        all_suite.addTest(_4st_suite)
+        all_suite.addTest(_5st_suite)
+        all_suite.addTest(_6st_suite)
+        all_suite.addTest(_7st_suite)
+        unittest.TextTestRunner(verbosity=1).run(_1st_suite)
     
     while True:
         if True == isplay :
