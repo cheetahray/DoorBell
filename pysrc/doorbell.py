@@ -19,13 +19,13 @@ debug = True
 isplay = False
 BUT_PIN = 7
 BOUNCE_TIME = 200
-MAG1_PIN = 11   #PL2
-MAG2_PIN = 12   #PL3
-MAG3_PIN = 13   #PL1
-MAG4_PIN = 15   #PL5
-MAG5_PIN = 16   #PL7
-MAG6_PIN = 18   #PL6
-MAG7_PIN = 22   #PL4
+MAG1_PIN = 11   #PL2 綠
+MAG2_PIN = 12   #PL3 黃
+MAG3_PIN = 13   #PL1 橘
+MAG4_PIN = 15   #PL5 白
+MAG5_PIN = 16   #PL7 紫
+MAG6_PIN = 18   #PL6 灰
+MAG7_PIN = 22   #PL4 藍
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(BUT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
