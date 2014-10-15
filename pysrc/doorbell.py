@@ -15,6 +15,7 @@ import unittest
 from mido import MidiFile
 
 mid = MidiFile('song.mid')
+debug = True
 isplay = False
 BUT_PIN = 7
 BOUNCE_TIME = 200
@@ -57,7 +58,8 @@ class Tests(unittest.TestCase):
         
     def test_1(self):
         for i in range(1,10):
-            print(i)
+            if debug:
+                print(i)
             pwm_mag1.ChangeDutyCycle(0)
             time.sleep(0.5)
             pwm_mag1.ChangeDutyCycle(100)
@@ -65,7 +67,8 @@ class Tests(unittest.TestCase):
         
     def test_2(self):
         for i in range(1,10):
-            print(i)
+            if debug:
+                print(i)
             pwm_mag2.ChangeDutyCycle(0)
             time.sleep(0.5)
             pwm_mag2.ChangeDutyCycle(100)
@@ -73,6 +76,8 @@ class Tests(unittest.TestCase):
         
     def test_3(self):
         for i in range(1,10):
+            if debug:
+                print(i)
             pwm_mag3.ChangeDutyCycle(0)
             time.sleep(0.5)
             pwm_mag3.ChangeDutyCycle(100)
@@ -80,6 +85,8 @@ class Tests(unittest.TestCase):
         
     def test_4(self):
         for i in range(1,10):
+            if debug:
+                print(i)
             pwm_mag4.ChangeDutyCycle(0)
             time.sleep(0.5)
             pwm_mag4.ChangeDutyCycle(100)
@@ -87,6 +94,8 @@ class Tests(unittest.TestCase):
         
     def test_5(self):
         for i in range(1,10):
+            if debug:
+                print(i)
             pwm_mag5.ChangeDutyCycle(0)
             time.sleep(0.5)
             pwm_mag5.ChangeDutyCycle(100)
@@ -94,6 +103,8 @@ class Tests(unittest.TestCase):
         
     def test_6(self):
         for i in range(1,10):
+            if debug:
+                print(i)
             pwm_mag6.ChangeDutyCycle(0)
             time.sleep(0.5)
             pwm_mag6.ChangeDutyCycle(100)
@@ -101,6 +112,8 @@ class Tests(unittest.TestCase):
     
     def test_7(self):
         for i in range(1,10):
+            if debug:
+                print(i)
             pwm_mag7.ChangeDutyCycle(0)
             time.sleep(0.5)
             pwm_mag7.ChangeDutyCycle(100)
@@ -163,8 +176,7 @@ def play_midi():
                 
 def callback_function(channel):
     isplay = True
-    #print "Button detected! ", time.strftime("%H:%M:%S")
-
+    
 try:
     GPIO.add_event_detect(BUT_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
 
