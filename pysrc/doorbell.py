@@ -65,6 +65,7 @@ class Tests(unittest.TestCase):
         
     def test_2(self):
         for i in range(1,10):
+            print(i)
             pwm_mag2.ChangeDutyCycle(0)
             time.sleep(0.5)
             pwm_mag2.ChangeDutyCycle(100)
@@ -191,7 +192,7 @@ try:
         all_suite.addTest(_5st_suite)
         all_suite.addTest(_6st_suite)
         all_suite.addTest(_7st_suite)
-        unittest.TextTestRunner(verbosity=1).run(_1st_suite)
+        unittest.TextTestRunner(verbosity=1).run(_2st_suite)
     
     while True:
         if True == isplay :
