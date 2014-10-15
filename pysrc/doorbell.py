@@ -19,13 +19,13 @@ debug = True
 isplay = False
 BUT_PIN = 7
 BOUNCE_TIME = 200
-MAG1_PIN = 11
-MAG2_PIN = 12
-MAG3_PIN = 13
-MAG4_PIN = 15
-MAG5_PIN = 16
-MAG6_PIN = 18
-MAG7_PIN = 22
+MAG1_PIN = 11   #PL2
+MAG2_PIN = 12   #PL3
+MAG3_PIN = 13   #PL1
+MAG4_PIN = 15   #PL5
+MAG5_PIN = 16   #PL7
+MAG6_PIN = 18   #PL6
+MAG7_PIN = 22   #PL4
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(BUT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -122,6 +122,8 @@ class Tests(unittest.TestCase):
 def play_midi():
     for message in mid.play():
         isplay = False
+        if debug:
+            print(message)
         if 'note_on' == message.type :
             if 60 == message.note :
                 if 0 == message.velocity :
@@ -190,6 +192,7 @@ try:
         _6st_suite = unittest.TestSuite()
         _7st_suite = unittest.TestSuite()
         all_suite = unittest.TestSuite()
+        midi_suite.addTest(Tests("test_0"))
         _1st_suite.addTest(Tests("test_1"))
         _2st_suite.addTest(Tests("test_2"))
         _3st_suite.addTest(Tests("test_3"))
@@ -204,7 +207,7 @@ try:
         all_suite.addTest(_5st_suite)
         all_suite.addTest(_6st_suite)
         all_suite.addTest(_7st_suite)
-        unittest.TextTestRunner(verbosity=1).run(_2st_suite)
+        unittest.TextTestRunner(verbosity=1).run(midi_suite)
     
     while True:
         if True == isplay :
