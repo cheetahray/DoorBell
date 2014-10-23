@@ -177,6 +177,8 @@ def play_midi():
                 pwm_mag7.ChangeDutyCycle(0)
                 
 def callback_function(channel):
+    if debug:
+        print isplay
     isplay = True
     
 try:
@@ -210,6 +212,8 @@ try:
         #unittest.TextTestRunner(verbosity=1).run(midi_suite)
     
     while True:
+        if debug:
+            print isplay
         if isplay:
             if debug:
                 print "ring"
