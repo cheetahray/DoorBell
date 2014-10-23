@@ -120,6 +120,7 @@ class Tests(unittest.TestCase):
             time.sleep(0.5)
     
 def play_midi():
+    global isplay
     for message in mid.play():
         isplay = False
         if debug:
@@ -177,8 +178,7 @@ def play_midi():
                 pwm_mag7.ChangeDutyCycle(0)
                 
 def callback_function(channel):
-    if debug:
-        print isplay
+    global isplay
     isplay = True
     
 try:
@@ -212,11 +212,9 @@ try:
         #unittest.TextTestRunner(verbosity=1).run(midi_suite)
     
     while True:
-        if debug:
-            print isplay
         if isplay:
             if debug:
-                print "ring"
+                print isplay 
             play_midi()
 
 except KeyboardInterrupt:
