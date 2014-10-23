@@ -177,6 +177,8 @@ def play_midi():
                 pwm_mag7.ChangeDutyCycle(0)
                 
 def callback_function(channel):
+    if debug:
+        print "ring" 
     isplay = True
     
 try:
