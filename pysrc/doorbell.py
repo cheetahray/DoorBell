@@ -19,13 +19,13 @@ debug = True
 isplay = False
 BUT_PIN = 7
 BOUNCE_TIME = 200
-MAG1_PIN = 11   #PL2 綠
-MAG2_PIN = 12   #PL3 黃
-MAG3_PIN = 13   #PL1 橘
-MAG4_PIN = 15   #PL5 白
-MAG5_PIN = 16   #PL7 紫
-MAG6_PIN = 18   #PL6 灰
-MAG7_PIN = 22   #PL4 藍
+MAG1_PIN = 11   #PL2 green
+MAG2_PIN = 12   #PL3 yellow
+MAG3_PIN = 13   #PL1 orange
+MAG4_PIN = 15   #PL5 white
+MAG5_PIN = 16   #PL7 purpal
+MAG6_PIN = 18   #PL6 gray
+MAG7_PIN = 22   #PL4 blue
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(BUT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -177,8 +177,6 @@ def play_midi():
                 pwm_mag7.ChangeDutyCycle(0)
                 
 def callback_function(channel):
-    if debug:
-        print "ring" 
     isplay = True
     
 try:
@@ -209,15 +207,15 @@ try:
         all_suite.addTest(_5st_suite)
         all_suite.addTest(_6st_suite)
         all_suite.addTest(_7st_suite)
-        unittest.TextTestRunner(verbosity=1).run(midi_suite)
+        #unittest.TextTestRunner(verbosity=1).run(midi_suite)
     
     while True:
         if True == isplay :
+            if debug:
+                print "ring"
             play_midi()
 
 except KeyboardInterrupt:
     print "Cleaning up the GPIO" 
     GPIO.cleanup()
-
-
 
