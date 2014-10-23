@@ -210,7 +210,7 @@ try:
         #unittest.TextTestRunner(verbosity=1).run(midi_suite)
     
     while True:
-        if True == isplay :
+        if isplay:
             if debug:
                 print "ring"
             play_midi()
