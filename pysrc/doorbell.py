@@ -216,8 +216,8 @@ try:
             if debug:
                 print isplay 
             play_midi()
-        else
-            time.delay(1)
+        else:
+            time.sleep(1)
 
 except KeyboardInterrupt:
     print "Cleaning up the GPIO" 
