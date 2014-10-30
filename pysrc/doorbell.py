@@ -15,16 +15,6 @@ import unittest
 from mido import MidiFile
 from apscheduler.schedulers.background import BackgroundScheduler
 
-sched = BackgroundScheduler()
-job1 = sched.add_job(do_job, 'interval', seconds = 1)
-job2 = sched.add_job(re_job, 'interval', seconds = 1)
-job3 = sched.add_job(mi_job, 'interval', seconds = 1)
-job4 = sched.add_job(fa_job, 'interval', seconds = 1)
-job5 = sched.add_job(so_job, 'interval', seconds = 1)
-job6 = sched.add_job(la_job, 'interval', seconds = 1)
-job7 = sched.add_job(ti_job, 'interval', seconds = 1)
-isorgan = False
-
 mid = MidiFile('song.mid')
 debug = True        #Boolean for on/off our debug print 
 isplay = False      #Boolean to judge whether the midi is playing
@@ -143,7 +133,7 @@ def play_midi():
     for message in mid.play():  #Next note from midi in this moment
         isplay = False          #To avoid duplicate doorbell button press during midi play
         if debug:
-            #print(message)
+            print(message)
         if 'note_on' == message.type :
             if 60 == message.note :
                 if 0 == message.velocity :
@@ -255,6 +245,16 @@ def ti_job():
     if debug:
         print "Every ti seconds"
     job7.pause()
+
+sched = BackgroundScheduler()
+isorgan = False
+job1 = sched.add_job(do_job, 'interval', seconds = 1)
+job2 = sched.add_job(re_job, 'interval', seconds = 1)
+job3 = sched.add_job(mi_job, 'interval', seconds = 1)
+job4 = sched.add_job(fa_job, 'interval', seconds = 1)
+job5 = sched.add_job(so_job, 'interval', seconds = 1)
+job6 = sched.add_job(la_job, 'interval', seconds = 1)
+job7 = sched.add_job(ti_job, 'interval', seconds = 1)
   
 try:
     GPIO.add_event_detect(BUT_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
