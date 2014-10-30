@@ -13,6 +13,7 @@ import RPi.GPIO as GPIO
 import time
 import unittest
 from mido import MidiFile
+from threading import Timer
 
 mid = MidiFile('song.mid')
 debug = True        #Boolean for on/off our debug print 
@@ -27,9 +28,6 @@ MAG5_PIN = 16       #GPIO pin number output to PL5 blue
 MAG6_PIN = 18       #GPIO pin number output to PL6 
 MAG7_PIN = 22       #GPIO pin number output to PL7 purple
 
-t = Timer(0.5, hello)
-t.start() # after 30 seconds, "hello, world" will be printed    
-            
 GPIO.setmode(GPIO.BOARD)    #Set GPIO input/output
 GPIO.setup(BUT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(MAG1_PIN, GPIO.OUT, initial=GPIO.LOW)
@@ -218,6 +216,8 @@ try:
         all_suite.addTest(_7st_suite)
         #unittest.TextTestRunner(verbosity=1).run(midi_suite)
     
+    t = Timer(0.5, hello)
+
     while True:
         if isplay:
             if debug:
