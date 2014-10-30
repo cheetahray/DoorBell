@@ -218,15 +218,15 @@ try:
     
     sched.start()
     job = sched.add_job(some_job, 'interval', seconds = 1)
-    job.Job.pause()
+    job.pause()
     
     while True:
         if isplay:
             if debug:
                 print isplay 
-            job.Job.resume()
+            job.resume()
             play_midi()
-            job.Job.pause()
+            job.pause()
         else:
             time.sleep(1)
 
