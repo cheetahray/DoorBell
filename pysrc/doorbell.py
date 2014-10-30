@@ -13,8 +13,9 @@ import RPi.GPIO as GPIO
 import time
 import unittest
 from mido import MidiFile
-from threading import Timer
+from apscheduler.schedulers.background import BackgroundScheduler
 
+sched = BackgroundScheduler()
 mid = MidiFile('song.mid')
 debug = True        #Boolean for on/off our debug print 
 isplay = False      #Boolean to judge whether the midi is playing
@@ -182,9 +183,8 @@ def callback_function(channel):
     global isplay
     isplay = True   #Switch on the boolean of midi play 
 
-def hello():
-    print "hello, world"
-    t.start()
+def some_job():
+    print "Every 10 seconds"
 
 try:
     GPIO.add_event_detect(BUT_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
@@ -216,15 +216,14 @@ try:
         all_suite.addTest(_7st_suite)
         #unittest.TextTestRunner(verbosity=1).run(midi_suite)
     
-    t = Timer(0.5, hello)
-
     while True:
         if isplay:
             if debug:
                 print isplay 
-            t.start()
+            sched.start()
+            sched.add_interval_job(some_job, seconds = 1)
             play_midi()
-            t.cancel()
+            sched.shutdown()
         else:
             time.sleep(1)
 
