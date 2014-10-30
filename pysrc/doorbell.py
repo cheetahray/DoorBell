@@ -132,8 +132,8 @@ def play_midi():
     global isorgan
     for message in mid.play():  #Next note from midi in this moment
         isplay = False          #To avoid duplicate doorbell button press during midi play
-        if debug:
-            print(message)
+        #if debug:
+            #print(message)
         if 'note_on' == message.type :
             if 60 == message.note :
                 if 0 == message.velocity :
@@ -208,53 +208,60 @@ def do_job():
     global job1
     if debug:
         print "Every do seconds"
+    pwm_mag1.ChangeDutyCycle(0)
     job1.pause()
 
 def re_job():
     global job2
     if debug:
         print "Every re seconds"
+    pwm_mag2.ChangeDutyCycle(0)
     job2.pause()
 
 def mi_job():
     global job3
     if debug:
         print "Every mi seconds"
+    pwm_mag3.ChangeDutyCycle(0)
     job3.pause()
 
 def fa_job():
     global job4
     if debug:
         print "Every fa seconds"
+    pwm_mag4.ChangeDutyCycle(0)
     job4.pause()
 
 def so_job():
     global job5
     if debug:
         print "Every so seconds"
+    pwm_mag5.ChangeDutyCycle(0)
     job5.pause()
 
 def la_job():
     global job6
     if debug:
         print "Every la seconds"
+    pwm_mag6.ChangeDutyCycle(0)
     job6.pause()
 
 def ti_job():
     global job7
     if debug:
         print "Every ti seconds"
+    pwm_mag7.ChangeDutyCycle(0)
     job7.pause()
 
 sched = BackgroundScheduler()
 isorgan = False
-job1 = sched.add_job(do_job, 'interval', seconds = 1)
-job2 = sched.add_job(re_job, 'interval', seconds = 1)
-job3 = sched.add_job(mi_job, 'interval', seconds = 1)
-job4 = sched.add_job(fa_job, 'interval', seconds = 1)
-job5 = sched.add_job(so_job, 'interval', seconds = 1)
-job6 = sched.add_job(la_job, 'interval', seconds = 1)
-job7 = sched.add_job(ti_job, 'interval', seconds = 1)
+job1 = sched.add_job(do_job, 'interval', seconds = 0.1)
+job2 = sched.add_job(re_job, 'interval', seconds = 0.1)
+job3 = sched.add_job(mi_job, 'interval', seconds = 0.1)
+job4 = sched.add_job(fa_job, 'interval', seconds = 0.1)
+job5 = sched.add_job(so_job, 'interval', seconds = 0.1)
+job6 = sched.add_job(la_job, 'interval', seconds = 0.1)
+job7 = sched.add_job(ti_job, 'interval', seconds = 0.1)
   
 try:
     GPIO.add_event_detect(BUT_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
