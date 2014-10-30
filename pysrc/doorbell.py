@@ -16,18 +16,27 @@ from mido import MidiFile
 from apscheduler.schedulers.background import BackgroundScheduler
 
 sched = BackgroundScheduler()
+job1 = sched.add_job(do_job, 'interval', seconds = 1)
+job2 = sched.add_job(re_job, 'interval', seconds = 1)
+job3 = sched.add_job(mi_job, 'interval', seconds = 1)
+job4 = sched.add_job(fa_job, 'interval', seconds = 1)
+job5 = sched.add_job(so_job, 'interval', seconds = 1)
+job6 = sched.add_job(la_job, 'interval', seconds = 1)
+job7 = sched.add_job(ti_job, 'interval', seconds = 1)
+isorgan = False
+
 mid = MidiFile('song.mid')
 debug = True        #Boolean for on/off our debug print 
 isplay = False      #Boolean to judge whether the midi is playing
 BUT_PIN = 7         #Doorbell button GPIO input pin number
 BOUNCE_TIME = 200   #GPIO input delay time
-MAG1_PIN = 11       #GPIO pin number output to PL1 red
-MAG2_PIN = 12       #GPIO pin number output to PL2 orange
-MAG3_PIN = 13       #GPIO pin number output to PL3 yellow
-MAG4_PIN = 15       #GPIO pin number output to PL4 green
-MAG5_PIN = 16       #GPIO pin number output to PL5 blue
-MAG6_PIN = 18       #GPIO pin number output to PL6 
-MAG7_PIN = 22       #GPIO pin number output to PL7 purple
+MAG1_PIN = 11       #GPIO pin number output to magnet PL1 red
+MAG2_PIN = 12       #GPIO pin number output to magnet PL2 orange
+MAG3_PIN = 13       #GPIO pin number output to magnet PL3 yellow
+MAG4_PIN = 15       #GPIO pin number output to magnet PL4 green
+MAG5_PIN = 16       #GPIO pin number output to magnet PL5 blue
+MAG6_PIN = 18       #GPIO pin number output to magnet PL6 
+MAG7_PIN = 22       #GPIO pin number output to magnet PL7 purple
 
 GPIO.setmode(GPIO.BOARD)    #Set GPIO input/output
 GPIO.setup(BUT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -123,45 +132,67 @@ class Tests(unittest.TestCase):
     
 def play_midi():
     global isplay
+    global job1
+    global job2
+    global job3
+    global job4
+    global job5
+    global job6
+    global job7
+    global isorgan
     for message in mid.play():  #Next note from midi in this moment
         isplay = False          #To avoid duplicate doorbell button press during midi play
         if debug:
-            print(message)
+            #print(message)
         if 'note_on' == message.type :
             if 60 == message.note :
                 if 0 == message.velocity :
                     pwm_mag1.ChangeDutyCycle(0)     #Do off
                 else :
+                    if False == isorgan:
+                        job1.resume()
                     pwm_mag1.ChangeDutyCycle(100)   #Do on
             elif 61 == message.note :
                 if 0 == message.velocity :
                     pwm_mag2.ChangeDutyCycle(0)     #Re off
                 else :
+                    if False == isorgan:
+                        job2.resume()
                     pwm_mag2.ChangeDutyCycle(100)   #Re on
             elif 62 == message.note :
                 if 0 == message.velocity :
                     pwm_mag3.ChangeDutyCycle(0)     #Mi off
                 else :
+                    if False == isorgan:
+                        job3.resume()
                     pwm_mag3.ChangeDutyCycle(100)   #Mi on
             elif 63 == message.note :
                 if 0 == message.velocity :
                     pwm_mag4.ChangeDutyCycle(0)     #Fa off
                 else :
+                    if False == isorgan:
+                        job4.resume()
                     pwm_mag4.ChangeDutyCycle(100)   #Fa on
             elif 64 == message.note :
                 if 0 == message.velocity :
                     pwm_mag5.ChangeDutyCycle(0)     #So off
                 else :
+                    if False == isorgan:
+                        job5.resume()
                     pwm_mag5.ChangeDutyCycle(100)   #So on
             elif 65 == message.note :
                 if 0 == message.velocity :
                     pwm_mag6.ChangeDutyCycle(0)     #La off
                 else :
+                    if False == isorgan:
+                        job6.resume()
                     pwm_mag6.ChangeDutyCycle(100)   #La on
             elif 66 == message.note :
                 if 0 == message.velocity :
                     pwm_mag7.ChangeDutyCycle(0)     #Ti off
                 else :
+                    if False == isorgan:
+                        job7.resume()
                     pwm_mag7.ChangeDutyCycle(100)   #Ti on
         elif 'note_off' == message.type :
             if 60 == message.note :
@@ -183,9 +214,48 @@ def callback_function(channel):
     global isplay
     isplay = True   #Switch on the boolean of midi play 
 
-def some_job():
-    print "Every 10 seconds"
+def do_job():
+    global job1
+    if debug:
+        print "Every do seconds"
+    job1.pause()
 
+def re_job():
+    global job2
+    if debug:
+        print "Every re seconds"
+    job2.pause()
+
+def mi_job():
+    global job3
+    if debug:
+        print "Every mi seconds"
+    job3.pause()
+
+def fa_job():
+    global job4
+    if debug:
+        print "Every fa seconds"
+    job4.pause()
+
+def so_job():
+    global job5
+    if debug:
+        print "Every so seconds"
+    job5.pause()
+
+def la_job():
+    global job6
+    if debug:
+        print "Every la seconds"
+    job6.pause()
+
+def ti_job():
+    global job7
+    if debug:
+        print "Every ti seconds"
+    job7.pause()
+  
 try:
     GPIO.add_event_detect(BUT_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
                     #Register the door bell button GPIO input call back function
@@ -217,16 +287,26 @@ try:
         #unittest.TextTestRunner(verbosity=1).run(midi_suite)
     
     sched.start()
-    job = sched.add_job(some_job, 'interval', seconds = 1)
-    job.pause()
+    job1.pause()
+    job2.pause()
+    job3.pause()
+    job4.pause()
+    job5.pause()
+    job6.pause()
+    job7.pause()
     
     while True:
         if isplay:
             if debug:
                 print isplay 
-            job.resume()
             play_midi()
-            job.pause()
+            job1.pause()
+            job2.pause()
+            job3.pause()
+            job4.pause()
+            job5.pause()
+            job6.pause()
+            job7.pause()
         else:
             time.sleep(1)
 
