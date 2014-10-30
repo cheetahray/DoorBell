@@ -216,18 +216,22 @@ try:
         all_suite.addTest(_7st_suite)
         #unittest.TextTestRunner(verbosity=1).run(midi_suite)
     
+    sched.start()
+    job = sched.add_job(some_job, 'interval', seconds = 1)
+    job.Job.pause()
+    
     while True:
         if isplay:
             if debug:
                 print isplay 
-            sched.start()
-            sched.add_interval_job(some_job, seconds = 1)
+            job.Job.resume()
             play_midi()
-            sched.shutdown()
+            job.Job.pause()
         else:
             time.sleep(1)
 
 except KeyboardInterrupt:
     print "Cleaning up the GPIO" 
     GPIO.cleanup()
+    sched.shutdown()
 
