@@ -27,6 +27,9 @@ MAG5_PIN = 16       #GPIO pin number output to PL5 blue
 MAG6_PIN = 18       #GPIO pin number output to PL6 
 MAG7_PIN = 22       #GPIO pin number output to PL7 purple
 
+t = Timer(0.5, hello)
+t.start() # after 30 seconds, "hello, world" will be printed    
+            
 GPIO.setmode(GPIO.BOARD)    #Set GPIO input/output
 GPIO.setup(BUT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(MAG1_PIN, GPIO.OUT, initial=GPIO.LOW)
@@ -122,7 +125,7 @@ class Tests(unittest.TestCase):
 def play_midi():
     global isplay
     for message in mid.play():  #Next note from midi in this moment
-        isplay = False
+        isplay = False          #To avoid duplicate doorbell button press during midi play
         if debug:
             print(message)
         if 'note_on' == message.type :
@@ -180,7 +183,11 @@ def play_midi():
 def callback_function(channel):
     global isplay
     isplay = True   #Switch on the boolean of midi play 
-    
+
+def hello():
+    print "hello, world"
+    t.start()
+
 try:
     GPIO.add_event_detect(BUT_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
                     #Register the door bell button GPIO input call back function
@@ -215,7 +222,9 @@ try:
         if isplay:
             if debug:
                 print isplay 
+            t.start()
             play_midi()
+            t.cancel()
         else:
             time.sleep(1)
 
