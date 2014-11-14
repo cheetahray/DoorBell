@@ -119,6 +119,28 @@ class Tests(unittest.TestCase):
             pwm_mag7.ChangeDutyCycle(100)
             time.sleep(0.5)
     
+    def test_8(self):   #Test 7th magnet for 10 times
+        pwm_mag1.ChangeDutyCycle(0)
+        time.sleep(0.5)
+        pwm_mag1.ChangeDutyCycle(100)
+        time.sleep(0.5)
+        pwm_mag2.ChangeDutyCycle(0)
+        time.sleep(0.5)
+        pwm_mag2.ChangeDutyCycle(100)
+        time.sleep(0.5)
+        pwm_mag4.ChangeDutyCycle(0)
+        time.sleep(0.5)
+        pwm_mag4.ChangeDutyCycle(100)
+        time.sleep(0.5)
+        pwm_mag5.ChangeDutyCycle(0)
+        time.sleep(0.5)
+        pwm_mag5.ChangeDutyCycle(100)
+        time.sleep(0.5)
+        pwm_mag6.ChangeDutyCycle(0)
+        time.sleep(0.5)
+        pwm_mag6.ChangeDutyCycle(100)
+        time.sleep(0.5)
+        
 def play_midi():
     global isplay
     for message in mid.play():  #Next note from midi in this moment
@@ -193,6 +215,7 @@ try:
         _5st_suite = unittest.TestSuite()   #Add 5th magnet test function
         _6st_suite = unittest.TestSuite()   #Add 6th magnet test function
         _7st_suite = unittest.TestSuite()   #Add 7th magnet test function
+        _8st_suite = unittest.TestSuite()   #Add 7th magnet test function
         all_suite = unittest.TestSuite()
         midi_suite.addTest(Tests("test_0"))
         _1st_suite.addTest(Tests("test_1"))
@@ -202,6 +225,7 @@ try:
         _5st_suite.addTest(Tests("test_5"))
         _6st_suite.addTest(Tests("test_6"))
         _7st_suite.addTest(Tests("test_7"))
+        _8st_suite.addTest(Tests("test_8"))
         all_suite.addTest(_1st_suite)
         all_suite.addTest(_2st_suite)
         all_suite.addTest(_3st_suite)
@@ -209,7 +233,7 @@ try:
         all_suite.addTest(_5st_suite)
         all_suite.addTest(_6st_suite)
         all_suite.addTest(_7st_suite)
-        #unittest.TextTestRunner(verbosity=1).run(midi_suite)
+        unittest.TextTestRunner(verbosity=1).run(_8st_suite)
     
     while True:
         if isplay:
