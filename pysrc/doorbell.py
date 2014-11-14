@@ -233,7 +233,7 @@ try:
         all_suite.addTest(_5st_suite)
         all_suite.addTest(_6st_suite)
         all_suite.addTest(_7st_suite)
-        unittest.TextTestRunner(verbosity=1).run(_8st_suite)
+        #unittest.TextTestRunner(verbosity=1).run(_8st_suite)
     
     while True:
         if isplay:
