@@ -14,7 +14,7 @@ import time
 import unittest
 from mido import MidiFile
 
-mid = MidiFile('song.mid')
+mid = MidiFile('/home/pi/DoorBell/pysrc/song.mid')
 debug = True        #Boolean for on/off our debug print 
 isplay = False      #Boolean to judge whether the midi is playing
 BUT_PIN = 7         #Doorbell button GPIO input pin number
