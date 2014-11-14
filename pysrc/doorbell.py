@@ -153,32 +153,32 @@ def play_midi():
                     pwm_mag1.ChangeDutyCycle(0)     #Do off
                 else :
                     pwm_mag1.ChangeDutyCycle(100)   #Do on
-            elif 61 == message.note :
+            elif 62 == message.note :
                 if 0 == message.velocity :
                     pwm_mag2.ChangeDutyCycle(0)     #Re off
                 else :
                     pwm_mag2.ChangeDutyCycle(100)   #Re on
-            elif 62 == message.note :
+            elif 64 == message.note :
                 if 0 == message.velocity :
                     pwm_mag3.ChangeDutyCycle(0)     #Mi off
                 else :
                     pwm_mag3.ChangeDutyCycle(100)   #Mi on
-            elif 63 == message.note :
+            elif 65 == message.note :
                 if 0 == message.velocity :
                     pwm_mag4.ChangeDutyCycle(0)     #Fa off
                 else :
                     pwm_mag4.ChangeDutyCycle(100)   #Fa on
-            elif 64 == message.note :
+            elif 67 == message.note :
                 if 0 == message.velocity :
                     pwm_mag5.ChangeDutyCycle(0)     #So off
                 else :
                     pwm_mag5.ChangeDutyCycle(100)   #So on
-            elif 65 == message.note :
+            elif 69 == message.note :
                 if 0 == message.velocity :
                     pwm_mag6.ChangeDutyCycle(0)     #La off
                 else :
                     pwm_mag6.ChangeDutyCycle(100)   #La on
-            elif 66 == message.note :
+            elif 71 == message.note :
                 if 0 == message.velocity :
                     pwm_mag7.ChangeDutyCycle(0)     #Ti off
                 else :
@@ -186,17 +186,17 @@ def play_midi():
         elif 'note_off' == message.type :
             if 60 == message.note :
                 pwm_mag1.ChangeDutyCycle(0)         #Do off
-            elif 61 == message.note :
-                pwm_mag2.ChangeDutyCycle(0)         #Re off
             elif 62 == message.note :
-                pwm_mag3.ChangeDutyCycle(0)         #Mi off
-            elif 63 == message.note :
-                pwm_mag4.ChangeDutyCycle(0)         #Fa off
+                pwm_mag2.ChangeDutyCycle(0)         #Re off
             elif 64 == message.note :
-                pwm_mag5.ChangeDutyCycle(0)         #So off
+                pwm_mag3.ChangeDutyCycle(0)         #Mi off
             elif 65 == message.note :
+                pwm_mag4.ChangeDutyCycle(0)         #Fa off
+            elif 67 == message.note :
+                pwm_mag5.ChangeDutyCycle(0)         #So off
+            elif 69 == message.note :
                 pwm_mag6.ChangeDutyCycle(0)         #La off
-            elif 66 == message.note :
+            elif 71 == message.note :
                 pwm_mag7.ChangeDutyCycle(0)         #Ti off
                 
 def callback_function(channel):
