@@ -17,6 +17,7 @@ from mido import MidiFile
 mid = MidiFile('/home/pi/DoorBell/pysrc/song.mid')
 debug = True        #Boolean for on/off our debug print 
 isplay = False      #Boolean to judge whether the midi is playing
+myshift = 12
 BUT_PIN = 7         #Doorbell button GPIO input pin number
 BOUNCE_TIME = 200   #GPIO input delay time
 MAG1_PIN = 11       #GPIO pin number output to magnet PL1 red
@@ -143,60 +144,61 @@ class Tests(unittest.TestCase):
         
 def play_midi():
     global isplay
+    global myshift
     for message in mid.play():  #Next note from midi in this moment
         isplay = False          #To avoid duplicate doorbell button press during midi play
         if debug:
             print(message)
         if 'note_on' == message.type :
-            if 60 == message.note :
+            if (60-myshift) == message.note :
                 if 0 == message.velocity :
                     pwm_mag1.ChangeDutyCycle(0)     #Do off
                 else :
                     pwm_mag1.ChangeDutyCycle(100)   #Do on
-            elif 62 == message.note :
+            elif (62-myshift) == message.note :
                 if 0 == message.velocity :
                     pwm_mag2.ChangeDutyCycle(0)     #Re off
                 else :
                     pwm_mag2.ChangeDutyCycle(100)   #Re on
-            elif 64 == message.note :
+            elif (64-myshift) == message.note :
                 if 0 == message.velocity :
                     pwm_mag4.ChangeDutyCycle(0)     #Mi off
                 else :
                     pwm_mag4.ChangeDutyCycle(100)   #Mi on
-            elif 65 == message.note :
+            elif (65-myshift) == message.note :
                 if 0 == message.velocity :
                     pwm_mag5.ChangeDutyCycle(0)     #Fa off
                 else :
                     pwm_mag5.ChangeDutyCycle(100)   #Fa on
-            elif 67 == message.note :
+            elif (67-myshift) == message.note :
                 if 0 == message.velocity :
                     pwm_mag6.ChangeDutyCycle(0)     #So off
                 else :
                     pwm_mag6.ChangeDutyCycle(100)   #So on
-            elif 69 == message.note :
+            elif (69-myshift) == message.note :
                 if 0 == message.velocity :
                     pwm_mag3.ChangeDutyCycle(0)     #La off
                 else :
                     pwm_mag3.ChangeDutyCycle(100)   #La on
-            elif 71 == message.note :
+            elif (71-myshift) == message.note :
                 if 0 == message.velocity :
                     pwm_mag7.ChangeDutyCycle(0)     #Ti off
                 else :
                     pwm_mag7.ChangeDutyCycle(100)   #Ti on
         elif 'note_off' == message.type :
-            if 60 == message.note :
+            if (60-myshift) == message.note :
                 pwm_mag1.ChangeDutyCycle(0)         #Do off
-            elif 62 == message.note :
+            elif (62-myshift) == message.note :
                 pwm_mag2.ChangeDutyCycle(0)         #Re off
-            elif 64 == message.note :
+            elif (64-myshift) == message.note :
                 pwm_mag4.ChangeDutyCycle(0)         #Mi off
-            elif 65 == message.note :
+            elif (65-myshift) == message.note :
                 pwm_mag5.ChangeDutyCycle(0)         #Fa off
-            elif 67 == message.note :
+            elif (67-myshift) == message.note :
                 pwm_mag6.ChangeDutyCycle(0)         #So off
-            elif 69 == message.note :
+            elif (69-myshift) == message.note :
                 pwm_mag3.ChangeDutyCycle(0)         #La off
-            elif 71 == message.note :
+            elif (71-myshift) == message.note :
                 pwm_mag7.ChangeDutyCycle(0)         #Ti off
                 
 def callback_function(channel):
