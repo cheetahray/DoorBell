@@ -57,66 +57,66 @@ class Tests(unittest.TestCase):
         play_midi();
         
     def test_1(self):   #Test 1st magnet for 10 times
-        for i in range(1,10):
+        for i in range(1,1):
             if debug:
                 print(i)
-            pwm_mag1.ChangeDutyCycle(0)
-            time.sleep(0.5)
             pwm_mag1.ChangeDutyCycle(100)
+            time.sleep(0.5)
+            pwm_mag1.ChangeDutyCycle(0)
             time.sleep(0.5)
         
     def test_2(self):   #Test 2nd magnet for 10 times
-        for i in range(1,10):
+        for i in range(1,1):
             if debug:
                 print(i)
-            pwm_mag2.ChangeDutyCycle(0)
-            time.sleep(0.5)
             pwm_mag2.ChangeDutyCycle(100)
+            time.sleep(0.5)
+            pwm_mag2.ChangeDutyCycle(0)
             time.sleep(0.5)
         
     def test_3(self):   #Test 3rd magnet for 10 times
-        for i in range(1,10):
+        for i in range(1,1):
             if debug:
                 print(i)
-            pwm_mag3.ChangeDutyCycle(0)
-            time.sleep(0.5)
             pwm_mag3.ChangeDutyCycle(100)
+            time.sleep(0.5)
+            pwm_mag3.ChangeDutyCycle(0)
             time.sleep(0.5)
         
     def test_4(self):   #Test 4th magnet for 10 times
-        for i in range(1,10):
+        for i in range(1,1):
             if debug:
                 print(i)
-            pwm_mag4.ChangeDutyCycle(0)
-            time.sleep(0.5)
             pwm_mag4.ChangeDutyCycle(100)
+            time.sleep(0.5)
+            pwm_mag4.ChangeDutyCycle(0)
             time.sleep(0.5)
         
     def test_5(self):   #Test 5th magnet for 10 times
-        for i in range(1,10):
+        for i in range(1,1):
             if debug:
                 print(i)
-            pwm_mag5.ChangeDutyCycle(0)
-            time.sleep(0.5)
             pwm_mag5.ChangeDutyCycle(100)
+            time.sleep(0.5)
+            pwm_mag5.ChangeDutyCycle(0)
             time.sleep(0.5)
         
     def test_6(self):   #Test 6th magnet for 10 times
-        for i in range(1,10):
+        for i in range(1,1):
             if debug:
                 print(i)
-            pwm_mag6.ChangeDutyCycle(0)
-            time.sleep(0.5)
             pwm_mag6.ChangeDutyCycle(100)
+            time.sleep(0.5)
+            pwm_mag6.ChangeDutyCycle(0)
             time.sleep(0.5)
     
     def test_7(self):   #Test 7th magnet for 10 times
-        for i in range(1,10):
+        for i in range(1,1):
             if debug:
                 print(i)
-            pwm_mag7.ChangeDutyCycle(0)
-            time.sleep(0.5)
             pwm_mag7.ChangeDutyCycle(100)
+            time.sleep(0.5)
+            pwm_mag7.ChangeDutyCycle(0)
             time.sleep(0.5)
     
     def test_8(self):   #Test 7th magnet for 10 times
@@ -160,24 +160,24 @@ def play_midi():
                     pwm_mag2.ChangeDutyCycle(100)   #Re on
             elif 64 == message.note :
                 if 0 == message.velocity :
-                    pwm_mag3.ChangeDutyCycle(0)     #Mi off
+                    pwm_mag4.ChangeDutyCycle(0)     #Mi off
                 else :
-                    pwm_mag3.ChangeDutyCycle(100)   #Mi on
+                    pwm_mag4.ChangeDutyCycle(100)   #Mi on
             elif 65 == message.note :
                 if 0 == message.velocity :
-                    pwm_mag4.ChangeDutyCycle(0)     #Fa off
+                    pwm_mag5.ChangeDutyCycle(0)     #Fa off
                 else :
-                    pwm_mag4.ChangeDutyCycle(100)   #Fa on
+                    pwm_mag5.ChangeDutyCycle(100)   #Fa on
             elif 67 == message.note :
                 if 0 == message.velocity :
-                    pwm_mag5.ChangeDutyCycle(0)     #So off
+                    pwm_mag6.ChangeDutyCycle(0)     #So off
                 else :
-                    pwm_mag5.ChangeDutyCycle(100)   #So on
+                    pwm_mag6.ChangeDutyCycle(100)   #So on
             elif 69 == message.note :
                 if 0 == message.velocity :
-                    pwm_mag6.ChangeDutyCycle(0)     #La off
+                    pwm_mag3.ChangeDutyCycle(0)     #La off
                 else :
-                    pwm_mag6.ChangeDutyCycle(100)   #La on
+                    pwm_mag3.ChangeDutyCycle(100)   #La on
             elif 71 == message.note :
                 if 0 == message.velocity :
                     pwm_mag7.ChangeDutyCycle(0)     #Ti off
@@ -189,13 +189,13 @@ def play_midi():
             elif 62 == message.note :
                 pwm_mag2.ChangeDutyCycle(0)         #Re off
             elif 64 == message.note :
-                pwm_mag3.ChangeDutyCycle(0)         #Mi off
+                pwm_mag4.ChangeDutyCycle(0)         #Mi off
             elif 65 == message.note :
-                pwm_mag4.ChangeDutyCycle(0)         #Fa off
+                pwm_mag5.ChangeDutyCycle(0)         #Fa off
             elif 67 == message.note :
-                pwm_mag5.ChangeDutyCycle(0)         #So off
+                pwm_mag6.ChangeDutyCycle(0)         #So off
             elif 69 == message.note :
-                pwm_mag6.ChangeDutyCycle(0)         #La off
+                pwm_mag3.ChangeDutyCycle(0)         #La off
             elif 71 == message.note :
                 pwm_mag7.ChangeDutyCycle(0)         #Ti off
                 
