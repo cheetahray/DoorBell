@@ -16,8 +16,9 @@ from mido import MidiFile
 
 mid = MidiFile('/home/pi/DoorBell/pysrc/song.mid')
 debug = True        #Boolean for on/off our debug print 
-isplay = False      #Boolean to judge whether the midi is playing
+#isplay = False      #Boolean to judge whether the midi is playing
 myshift = 12
+BUT_CNT = 0
 BUT_PIN = 7         #Doorbell button GPIO input pin number
 BOUNCE_TIME = 200   #GPIO input delay time
 MAG1_PIN = 11       #GPIO pin number output to magnet PL1 red
@@ -62,7 +63,7 @@ class Tests(unittest.TestCase):
             if debug:
                 print(i)
             pwm_mag1.ChangeDutyCycle(100)
-            time.sleep(0.5)
+            time.sleep(0.3)
             pwm_mag1.ChangeDutyCycle(0)
             time.sleep(0.5)
         
@@ -143,13 +144,14 @@ class Tests(unittest.TestCase):
         time.sleep(0.1)
         
 def play_midi():
-    global isplay
+    #global isplay
     global myshift
+    global BUT_CNT
     for message in mid.play():  #Next note from midi in this moment
-        isplay = False          #To avoid duplicate doorbell button press during midi play
-        if debug:
-            print(message)
+        #isplay = False          #To avoid duplicate doorbell button press during midi play
         if 'note_on' == message.type :
+            if debug:
+                print('%d ' % message.note),
             if (60-myshift) == message.note :
                 if 0 == message.velocity :
                     pwm_mag1.ChangeDutyCycle(0)     #Do off
@@ -200,14 +202,16 @@ def play_midi():
                 pwm_mag3.ChangeDutyCycle(0)         #La off
             elif (71-myshift) == message.note :
                 pwm_mag7.ChangeDutyCycle(0)         #Ti off
+    BUT_CNT = 0
                 
-def callback_function(channel):
-    global isplay
-    isplay = True   #Switch on the boolean of midi play 
+#def callback_function(channel):
+    #global isplay
+    #isplay = True   #Switch on the boolean of midi play 
 
 try:
-    GPIO.add_event_detect(BUT_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
+    #GPIO.add_event_detect(BUT_PIN, GPIO.RISING, callback=callback_function, bouncetime=BOUNCE_TIME)
                     #Register the door bell button GPIO input call back function
+
     if '__main__' == __name__ :
         midi_suite = unittest.TestSuite()   #Add play midi test function
         _1st_suite = unittest.TestSuite()   #Add 1st magnet test function
@@ -238,12 +242,14 @@ try:
         #unittest.TextTestRunner(verbosity=1).run(_8st_suite)
     
     while True:
-        if isplay:
+        if BUT_CNT > 300:
             if debug:
-                print isplay 
+                print BUT_CNT 
             play_midi()
+        elif GPIO.input(BUT_PIN) == GPIO.HIGH :
+            BUT_CNT = BUT_CNT + 1
         else:
-            time.sleep(1)
+            time.sleep(0.4)
 
 except KeyboardInterrupt:
     print "Cleaning up the GPIO" 
