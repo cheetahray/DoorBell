@@ -249,7 +249,7 @@ try:
         elif GPIO.input(BUT_PIN) == GPIO.HIGH :
             BUT_CNT = BUT_CNT + 1
         else:
-            time.sleep(0.4)
+            time.sleep(0.333)
 
 except KeyboardInterrupt:
     print "Cleaning up the GPIO" 
