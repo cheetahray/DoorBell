@@ -14,7 +14,7 @@ import unittest
 from mido import MidiFile
 import xlsxwriter
 
-mid = MidiFile('song.mid')
+mid = MidiFile('matti-lights-6.mid')
 debug = True        #Boolean for on/off our debug print 
 isplay = False      #Boolean to judge whether the midi is playing
 
